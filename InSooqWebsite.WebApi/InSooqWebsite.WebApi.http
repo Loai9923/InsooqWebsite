@@ -1,0 +1,6 @@
+@InSooqWebsite.WebApi_HostAddress = http://localhost:5298
+
+GET {{InSooqWebsite.WebApi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
