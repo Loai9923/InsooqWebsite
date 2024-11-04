@@ -15,6 +15,6 @@ public class UserDto
 
     public string Phone { get; set; }
 
-
-
+    public int? RoleId { get; set; }
+    public int? StatusId { get; set; }
 }

@@ -18,12 +18,12 @@ public class User
 
     public int? RoleId { get; set; }
 
-    [JsonIgnore]
-    public Role? Role { get; set; }
+    
+    public Role Role { get; set; }
 
     public int? StatusId { get; set; }
-    [JsonIgnore]
-    public Status? Status { get; set; }
+   
+    public Status Status { get; set; }
 
     public DateTime CreateDate { get; set; } = DateTime.Now;
 

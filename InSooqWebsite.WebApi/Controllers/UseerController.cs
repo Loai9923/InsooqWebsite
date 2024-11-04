@@ -13,6 +13,7 @@ namespace InSooqWebsite.WebApi.Controllers
         private readonly IUser _users;
         public UseerController(IUser users)
         {
+
             _users = users;
         }
 
@@ -25,5 +26,22 @@ namespace InSooqWebsite.WebApi.Controllers
             return Ok("Added Successfully");
             
         }
+        [HttpGet]
+        [Route("Get_All")]
+        public async Task<IActionResult> GetAll()
+        {
+            var result = await _users.GetAll();
+            return Ok(result);
+        }
+
+        [HttpGet]
+        [Route("Search_For")]
+        public async Task<IActionResult> Search(string Name)
+        {
+            var result = await _users.Search(Name);
+            return Ok(result);
+        }
     }
+
+   
 }
