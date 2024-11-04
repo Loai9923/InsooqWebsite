@@ -4,6 +4,7 @@ using InsooqWebsite.Domains.Cores;
 using InsooqWebsite.Domains.Dtos;
 using InsooqWebsite.Domains.Enum;
 using InsooqWebsite.Domains.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace inSooqWebsite.Services;
 
@@ -58,14 +59,56 @@ public class UserServices : IUser
         throw new NotImplementedException();
     }
 
-    public Task<List<UserDto>> GetAll()
+    public async Task<List<ViewUserDto>> GetAll()
     {
-        throw new NotImplementedException();
+        try 
+        {
+            var list = await _context.Users
+                .Include(q=>q.Role).Include(q=>q.Status).Select(q=>new ViewUserDto() 
+                { 
+                 Name=q.Name,
+                 Email=q.Email,
+                 Phone=q.Phone,
+                 RoleName = q.Role.Name,
+                 StatusName  = q.Status.Name,
+                
+                })
+                .ToListAsync();
+            
+            return list;
+        }
+        catch 
+        {
+        throw ;
+        }
     }
 
-    public Task<List<User>> Search(string Name)
+    public async Task<List<ViewUserDto>> Search(string Name)
     {
-        throw new NotImplementedException();
+        try
+        {
+            var list = await _context.Users
+                .Include(q => q.Role)
+                .Include(q => q.Status)
+                .Where(q => q.Name == Name)
+                .Select(q => new ViewUserDto()
+                {
+                    Name = q.Name,
+                    Email = q.Email,
+                    Phone = q.Phone,
+                    RoleName = q.Role.Name,
+                    StatusName = q.Status.Name,
+
+                })
+                .ToListAsync();
+   
+
+            return list;
+        }
+        catch
+        {
+            throw;
+        }
     }
 
     public Task<OpStatus> Update(UserDto user)

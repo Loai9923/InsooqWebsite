@@ -15,9 +15,9 @@ public interface IUser
 
     Task<User> Get(int id);
 
-    Task<List<UserDto>> GetAll ();
+    Task<List<ViewUserDto>> GetAll ();
 
-    Task<List<User>> Search(string Name );
+    Task<List<ViewUserDto>> Search(string Name );
 
 
 
